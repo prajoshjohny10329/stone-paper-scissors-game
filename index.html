@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="message-box" class="message-box">
+        <h5 id="win-note-id"></h5>
+        <h1 id="winner-id"></h1>
+    </div>
+    <div class="container">
+        <div class="heading-div">
+            <h1 class="heading-title">Stone Paper Scissors </h1>
+        </div>
+        <div class="second-div">
+            <div class="name-div">
+                <h3>You</h3>
+            </div>
+            <div class="name-div">
+                <h3>Me</h3>
+            </div>
+        </div>
+        <div class="main-container">
+
+            <div class="user-part">
+                <div><img class="imges" src="img/stone.png" alt="" onclick="userTouch('stone')"></div>
+                <div><img class="imges" src="img/paper.png" alt="" onclick="userTouch('paper')"></div>
+                <div><img class="imges" src="img/scissors.png" alt="" onclick="userTouch('scissors')"></div>
+
+            </div>
+            <div class="computer-part">
+                <h2 id="please-select">please select one in the given images</h2>
+                <div><img id="computer-image" class="imges" src="img/paper.png"></div>
+            </div>
+        </div>
+        <div class="result-div">
+            <div class="result">
+                <div class="result-box">
+                    <h2 id="user-score">0</h2>
+                </div>
+            </div>
+            <div class="result">
+                <div class="result-box">
+                    <h2 id="computer-score">0</h2>
+                </div>
+
+            </div>
+        </div>
+        <div class="new-game-div">
+            <button onclick="newGame()" class="button-class">New Game</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
