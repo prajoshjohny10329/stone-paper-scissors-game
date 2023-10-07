@@ -2,6 +2,8 @@
 let rock = "rock";
 let paper = "paper";
 let scissors = "scissors";
+let limit = 20
+let count =1;
 
 let computerScore = 0;
 let userScore = 0
@@ -16,15 +18,14 @@ let winNote = document.getElementById('win-note-id')
 let winner = document.getElementById('winner-id')
 
 
+
 function userTouch(value){
     let userInput = value
-
+    count = count+1;
     let randomNumber = Math.floor(Math.random()*3)+1;
     let computerChoice ;
     showComputerImage(randomNumber)
     randomNumber == 1 ? computerChoice = rock : randomNumber == 2 ?computerChoice = paper : computerChoice = scissors;
-    console.log(`computer choice ${computerChoice} \n userChoice ${userInput}`);
-
     finalChecking( computerChoice,userInput)
 
 }
@@ -41,28 +42,11 @@ function showComputerImage(number){
     if(number ==3 ){
         computerDisplay.src = "img/scissors.png"
     }
-
-    
-    
-    
 }
-
-
-
-
 
 function newGame(){
     location.reload()
 }
-
-
-
-
-
-
-
-let a = 'Cbs'
-console.log(a.toLocaleUpperCase());
 
 function finalChecking(computerChoice,userInput){
     let replay;
@@ -76,9 +60,8 @@ function finalChecking(computerChoice,userInput){
     :userInput == scissors && computerChoice === rock
     ?  replay = `You choose "${userInput.toLocaleUpperCase()}" I choose "${computerChoice.toLocaleUpperCase()}"`
     : replay = `You choose "${userInput.toLocaleUpperCase()}" I choose "${computerChoice.toLocaleUpperCase()}"`
-    console.log(replay);
-    //who win
 
+    //who win
     computerChoice === userInput ? whoWin = "both are same no score":
     userInput === rock && computerChoice == paper
     ?  whoWin = 'I am win'
@@ -87,8 +70,8 @@ function finalChecking(computerChoice,userInput){
     :userInput == scissors && computerChoice === rock
     ?  whoWin = 'I am win'
     :  whoWin =  `You are win`
-    //score
 
+    //score
     computerChoice === userInput ? replay = "both are same no score":
     userInput === rock && computerChoice == paper
     ?  computerScore = computerScore+1
@@ -97,9 +80,6 @@ function finalChecking(computerChoice,userInput){
     :userInput == scissors && computerChoice === rock
     ?  computerScore = computerScore+1
     : userScore = userScore+1
-
-    console.log(userScore);
-    console.log(computerScore);
 
     userScoreId.innerText = userScore
     computerScoreId.innerText = computerScore
@@ -110,17 +90,57 @@ function finalChecking(computerChoice,userInput){
     setTimeout(() => {
         messageBox.style.display ='none'
     }, 1500);
-
-    
-
-
-
+    checkLimit()
 
 }
 
+function checkLimit() {
+  if (count >= limit) {
+    let mainDiv = document.getElementById("main-div");
+    let childElements = mainDiv.querySelectorAll("*");
 
+    childElements.forEach(function (element) {
+      element.removeAttribute("onclick");
+    });
 
-
-///computer part
+    if (userScore > computerScore) {
+      whoWin = `"CONGRATULATIONS" You are the Winner`;
+      setTimeout(() => {
+        winner.innerText = whoWin;
+        messageBox.style.backgroundImage =
+          "linear-gradient(rgb(0, 5, 19), rgb(89 255 0) 150%)";
+        messageBox.style.boxShadow = "0px 0px 15px 0px green";
+        messageBox.style.display = "flex";
+      }, 2000);
+      setTimeout(() => {
+        newGame();
+      }, 5000);
+    } else if (computerScore > userScore) {
+      whoWin = `"SORRY" You are defeated this game`;
+      setTimeout(() => {
+        winner.innerText = whoWin;
+        messageBox.style.backgroundImage =
+          "linear-gradient(rgb(0, 5, 19), rgb(255 0 0) 150%)";
+        messageBox.style.boxShadow = "0px 0px 15px 0px red";
+        messageBox.style.display = "flex";
+      }, 2000);
+      setTimeout(() => {
+        newGame();
+      }, 5000);
+    } else {
+      whoWin = `Both are Equal`;
+      setTimeout(() => {
+        winner.innerText = whoWin;
+        messageBox.style.backgroundImage =
+          "linear-gradient(rgb(0, 5, 19), rgb(255 212 0) 150%)";
+        messageBox.style.boxShadow = "0px 0px 15px 0px orange";
+        messageBox.style.display = "flex";
+      }, 2000);
+      setTimeout(() => {
+        newGame();
+      }, 5000);
+    }
+  }
+}
 
 
